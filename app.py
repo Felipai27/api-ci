@@ -1,10 +1,7 @@
 from flask import Flask, request, jsonify
 
-app = Flask(__name__)
 
-# Lista inicial de presentes
-lista_presentes = []
-next_id = 1
+app = Flask(__name__)
 
 
 # Lista inicial de presentes
@@ -13,13 +10,17 @@ lista_presentes = [
 ]
 proximo_id = 2
 
-# Rota para listar todos os presentes
+
+@app.route("/")
+def home():
+    return {"mensagem": "API de Presentes rodando com sucesso!"}
+
+
 @app.route("/presentes", methods=["GET"])
 def listar_presentes():
     return jsonify(lista_presentes)
 
 
-# Rota para adicionar um novo presente
 @app.route("/presentes", methods=["POST"])
 def adicionar_presente():
     global proximo_id
@@ -33,7 +34,7 @@ def adicionar_presente():
     proximo_id += 1
     return jsonify(presente), 201
 
-# Buscar um presente pelo ID
+
 @app.route("/presentes/<int:id_presente>", methods=["GET"])
 def buscar_presente_por_id(id_presente):
     for presente in lista_presentes:
@@ -42,7 +43,6 @@ def buscar_presente_por_id(id_presente):
     return jsonify({"erro": "Presente não encontrado"}), 404
 
 
-# Atualizar um presente existente
 @app.route("/presentes/<int:id_presente>", methods=["PUT"])
 def atualizar_presente(id_presente):
     dados = request.get_json()
@@ -54,7 +54,6 @@ def atualizar_presente(id_presente):
     return jsonify({"erro": "Presente não encontrado"}), 404
 
 
-# Remover um presente
 @app.route("/presentes/<int:id_presente>", methods=["DELETE"])
 def remover_presente(id_presente):
     for presente in lista_presentes:
@@ -62,11 +61,6 @@ def remover_presente(id_presente):
             lista_presentes.remove(presente)
             return jsonify({"mensagem": "Presente removido com sucesso"})
     return jsonify({"erro": "Presente não encontrado"}), 404
-
-
-@app.route("/")
-def home():
-    return {"mensagem": "API de Presentes rodando com sucesso!"}
 
 
 if __name__ == "__main__":
