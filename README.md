@@ -1,3 +1,6 @@
+![CI](https://github.com/Felipai27/api-ci/actions/workflows/ci.yml/badge.svg)
+
+
 
 # API Base - Lista de Presentes
 
