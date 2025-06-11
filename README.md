@@ -1,7 +1,6 @@
 ![CI](https://github.com/Felipai27/api-ci/actions/workflows/ci.yml/badge.svg)
 
 
-
 # API Base - Lista de Presentes
 
 Este repositório contém a estrutura base para uma API em Flask que gerencia uma lista de presentes. Os métodos da API ainda não estão implementados, cabendo ao desenvolvedor a responsabilidade de completar as funcionalidades.
